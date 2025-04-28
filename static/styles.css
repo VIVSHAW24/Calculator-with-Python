@@ -1,0 +1,21 @@
+
+h1 {
+    color: blue;
+    text-align: center;
+    font-size: 2em;
+    background-color: lightblue;
+}
+
+body {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    background-color: rgb(219, 203, 203);
+    font-family: Arial, sans-serif;
+}
+
+h2 {
+    color: red;
+    text-align: center;
+    font-size: 2em;
+    background-color: lightblue;
+}

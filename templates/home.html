@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Keysight App</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Mathematics for Keysight Application</h1>
+<div> 
+    <h2><b>Calculator</b></h2>
+    <form action="/calculate" method="post">
+            <input type="number" name="num1" required>
+            <select name="operation">
+                <option value="add">Add</option>
+                <option value="subtract">Subtract</option>
+                <option value="multiply">Multiply</option>
+                <option value="divide">Divide</option>
+            </select>
+            <input type="number" name="num2" required>
+            <button type="submit">Calculate</button>
+        </form>
+        
+    {% if result is not none %}
+        <h2><i>Result: {{ result }}</i></h2>
+    {% endif %}
+
+</div>
+<br>
+<div>    
+    <h2><b>Conversion from watt to dBm</b></h2>
+    <form action="/conversion" method="post">
+            <input type="number" name="wattpower" required>
+            <select name="operation">
+                <option value="dBm">dBm</option>
+            </select>
+            <button type="submit">Convert to dBm from watt</button>
+        </form>
+        
+    {% if result is not none %}
+        <h2><i>dBm</i>: {{ dBm }}</h2>
+    {% endif %} 
+</div>
+
+</body>
+</html>
