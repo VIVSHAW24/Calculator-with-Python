@@ -23,6 +23,11 @@ def watt_to_dbm(watt):
     dbm = 10 * math.log10(watt * 1000)
     return dbm
 
+def dBm_to_watt(dBm):
+    import math
+    watt = 10 ** (dBm / 10) / 1000
+    return watt
+
 @app.route('/')
 def home():
     return render_template('home.html')
@@ -46,17 +51,17 @@ def calculate():
     
     return render_template('home.html', result=result)
 
+
 @app.route('/conversion', methods=['POST'])
 def conversion():
+    power = float(request.form['power'])
     operation = request.form['operation']
-    wattpower = float(request.form['wattpower'])
-
     if operation == 'dBm':
-        result3 = watt_to_dbm(wattpower)
+        powerAfterConversion = watt_to_dbm(power)
     else:
-        result3 = 'Invalid operation'
+        powerAfterConversion = dBm_to_watt(power)
+    return render_template('home.html', dBm=powerAfterConversion, result=True, selected_operation=operation)
 
-    return render_template('home.html', dBm=result3)
 
 if __name__ == '__main__':
     app.run(debug=True)

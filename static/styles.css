@@ -9,7 +9,7 @@ h1 {
 body {
     margin-top: 0px;
     margin-bottom: 0px;
-    background-color: rgb(219, 203, 203);
+    background-color: black;
     font-family: Arial, sans-serif;
 }
 
@@ -18,4 +18,11 @@ h2 {
     text-align: center;
     font-size: 2em;
     background-color: lightblue;
+}
+
+select {
+    color: red; 
+    background-color: black; 
+    border-radius: 8px; 
+    padding: 5px;
 }
