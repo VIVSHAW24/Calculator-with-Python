@@ -18,8 +18,6 @@ def divide(a, b):
 
 def watt_to_dbm(watt):
     import math
-    if watt <= 0:
-        return 'Error: Power must be greater than 0'
     dbm = 10 * math.log10(watt * 1000)
     return dbm
 
@@ -55,12 +53,12 @@ def calculate():
 @app.route('/conversion', methods=['POST'])
 def conversion():
     power = float(request.form['power'])
-    operation = request.form['operation']
+    operation = request.form['operation1']
     if operation == 'dBm':
         powerAfterConversion = watt_to_dbm(power)
     else:
         powerAfterConversion = dBm_to_watt(power)
-    return render_template('home.html', dBm=powerAfterConversion, result=True, selected_operation=operation)
+    return render_template('home.html', dBm=powerAfterConversion, selected_operation=operation, input_power=power)
 
 
 if __name__ == '__main__':

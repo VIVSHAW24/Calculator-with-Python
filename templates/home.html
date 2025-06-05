@@ -11,6 +11,7 @@
     <h2><b>Calculator</b></h2>
     <form action="/calculate" method="post">
             <input type="number" name="num1" step="any" required>
+             <label for="conversionType">Select Operation:</label>
             <select name="operation" id="operation">
                 <option value="add"><b>Add</b></option>
                 <option value="subtract"><b>Subtract</b></option>
@@ -25,40 +26,51 @@
         <h2><i>Result: {{ result }}</i></h2>
     {% endif %}
 
-</div>
-<br>
-<div>    
-    <h2><b>Conversion from Power between Watt and dBm</b></h2>
-    <form action="/conversion" method="post">
-        <input type="number" name="power" step="any" required>
-        <select name="operation" id="operation">
-            <option value="dBm">dBm</option>
-            <option value="Watt">Watt</option>
-          </select>
-        <button type="submit" id="convertBtn">Convert to dBm from watt</button>
-    </form>
+    <div>    
+        <h2><b>Conversion from Power between Watt and dBm</b></h2>
+        <form action="/conversion" method="post">
+            <input type="number" name="power" step="any" required value="{{ input_power if input_power is defined else '' }}">
     
-    <script>
-        const selectElement = document.getElementById('operation');
-        const buttonElement = document.getElementById('convertBtn');
+            <label for="operation1">Select Conversion:</label>
+            <select name="operation1"  id="operation1" onchange="cal()">
+                <option value="dBm" {% if selected_operation == 'dBm' %}selected{% endif %}>dBm</option>
+                <option value="Watt" {% if selected_operation == 'Watt' %}selected{% endif %}>Watt</option>
+            </select>
     
-        selectElement.addEventListener('change', function () {
-            if (this.value === 'dBm') {
-                buttonElement.textContent = 'Convert to dBm from watt';
-            } else if (this.value === 'watt') {
-                buttonElement.textContent = 'Convert to watt from dBm';
+            <button type="submit" id="convertBtn">
+                {% if selected_operation == 'Watt' %}
+                    Convert to Watt from dBm
+                {% else %}
+                    Convert to dBm from Watt
+                {% endif %}
+            </button>
+        </form>
+    
+        <script>
+            const selectElement = document.getElementById('operation1');
+            const buttonElement = document.getElementById('convertBtn');
+            function cal() {
+                const selectedValue = selectElement.value;
+                console.log(selectedValue);
             }
-        });
-    </script>
-        
-    <h2>
-         <i>
-            {% if result is not none %}
-            powerAfterConversion: {{ dBm }}
-            {% endif %}
-        </i>
-    </h2>
-</div>
-
+            function updateButtonText() {
+                const selectedValue = selectElement.value;
+                if (selectedValue === 'dBm') {
+                    buttonElement.textContent = 'Convert to dBm from Watt';
+                } else if (selectedValue === 'Watt') {
+                    buttonElement.textContent = 'Convert to Watt from dBm';
+                }
+            }
+    
+            selectElement.addEventListener('change', updateButtonText);
+            // Call on load to sync with selected value
+            updateButtonText();
+        </script>
+    
+        {% if dBm is not none %}
+            <h2><i>Power After Conversion: {{ dBm }}</i></h2>
+        {% endif %}
+    </div>   
+    
 </body>
 </html>

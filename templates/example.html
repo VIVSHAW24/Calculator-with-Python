@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic Button Text</title>
+</head>
+<body>
+    <h2><b>Choose a Conversion Type</b></h2>
+
+    <label for="conversionType">Select Conversion:</label>
+    <select id="conversionType">
+        <option value="to_dBm">Convert to dBm from Watt</option>
+        <option value="to_Watt">Convert to Watt from dBm</option>
+        <option value="to_Voltage">Convert to Voltage from Watt</option>
+    </select>
+
+    <br><br>
+    <button id="convertBtn">Convert to dBm from Watt</button>
+
+    <script>
+        const selectElement = document.getElementById('conversionType');
+        const buttonElement = document.getElementById('convertBtn');
+
+        selectElement.addEventListener('change', function () {
+            const selectedValue = selectElement.value;
+
+            if (selectedValue === 'to_dBm') {
+                buttonElement.textContent = 'Convert to dBm from Watt';
+            } else if (selectedValue === 'to_Watt') {
+                buttonElement.textContent = 'Convert to Watt from dBm';
+            } else if (selectedValue === 'to_Voltage') {
+                buttonElement.textContent = 'Convert to Voltage from Watt';
+            }
+        });
+    </script>
+</body>
+</html>
