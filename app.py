@@ -1,4 +1,6 @@
 from flask import Flask, request, render_template
+from pdf_search_logic import search_content  # Assuming pdf_search_logic.py contains the search logic for PDFs
+import math
 
 app = Flask(__name__)
 
@@ -17,12 +19,10 @@ def divide(a, b):
     return a / b
 
 def watt_to_dbm(watt):
-    import math
     dbm = 10 * math.log10(watt * 1000)
     return dbm
 
 def dBm_to_watt(dBm):
-    import math
     watt = 10 ** (dBm / 10) / 1000
     return watt
 
@@ -59,6 +59,16 @@ def conversion():
     else:
         powerAfterConversion = dBm_to_watt(power)
     return render_template('home.html', dBm=powerAfterConversion, selected_operation=operation, input_power=power)
+
+@app.route('/search', methods=['POST'])
+def search():
+    content = str(request.form['query'])
+    output = search_content(content)
+    #if not result:
+       # content = 'No results found.'
+   # else:
+      #  content = f'Search results for "{content}": {result}'
+    return render_template('home.html', searching=output, search=content)
 
 
 if __name__ == '__main__':

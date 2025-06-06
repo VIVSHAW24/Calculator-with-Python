@@ -13,13 +13,26 @@ body {
     font-family: Arial, sans-serif;
 }
 
-h2 {
+h3 {
     color: red;
     text-align: center;
     font-size: 2em;
     background-color: black;
     padding: 10px;
     margin: 20px 0 10px 0;
+}
+
+h2 {
+    background-color: white;
+    border-radius: 25px;         /* Cylindrical shape */
+    border: 1px solid red;
+    padding: 15px 20px;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 600px;
+    font-size: 1.1em;
+    text-align: left;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 form {
@@ -32,6 +45,13 @@ form {
 }
 
 input[type="number"], select, button {
+    font-size: 1em;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+input[type="text"], select, button {
     font-size: 1em;
     padding: 10px;
     border-radius: 8px;
@@ -52,14 +72,25 @@ button {
     cursor: pointer;
 }
 
-.result-block {
-    text-align: center;
-    font-size: 1.5em;
-    font-style: italic;
-    color: red;
-    margin-top: 10px;
-    background-color: black;
-    padding: 10px;
-    border-radius: 8px;
-    display: inline-block;
+.result-box {
+    background-color: white;
+    border-radius: 25px;
+    border: 1px solid red;
+    padding: 20px;
+    margin: 20px auto;
+    width: 95%;                 /* Wider by default */
+    max-width: 1200px;          /* Increased from 600px to fit wider screens */
+    font-size: 1.1em;
+    text-align: left;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+    color: black;
+    line-height: 1.6;
+
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    overflow-x: auto;
 }
+
+
+
