@@ -21,7 +21,7 @@ def search_content(query, file_path="data/RTSA.pdf"):
                     matched_line = f"{prev_line} {matched} {next_line}"
 
             results.append({
-                "page": page_num,
+                #"page": page_num,
                 "match": matched_line
             })
 
@@ -29,8 +29,10 @@ def search_content(query, file_path="data/RTSA.pdf"):
 
     if results:
         list_results = [
-            f"On page {r['page']}, the content is: \"{r['match']}\""
+            f" the content is: \"{r['match']}\""
             for r in results]
         return "\n".join(list_results)
     else:
         return "No relevant information found in the document."
+
+#On page {r['page']},

@@ -1,8 +1,12 @@
 from flask import Flask, request, render_template
 from pdf_search_logic import search_content  # Assuming pdf_search_logic.py contains the search logic for PDFs
+from gpt2_connector import  GPT2Connector
+from semantic_kernel.connectors.ai.prompt_execution_settings import PromptExecutionSettings
+import asyncio
 import math
 
 app = Flask(__name__)
+gpt2_service = GPT2Connector()
 
 def add(a, b):
     return a + b
@@ -64,11 +68,23 @@ def conversion():
 def search():
     content = str(request.form['query'])
     output = search_content(content)
+   
+    # Build prompt for GPT-2
+    prompt = f"Based on the following document excerpt:\n\n{output}\n\nAnswer this question:\n{content}"
+    
+   # Run GPT-2 asynchronously
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    response = loop.run_until_complete(gpt2_service.get_chat_message_contents(messages=prompt,settings=PromptExecutionSettings()))
+    
+    gpt2_answer = (response[0].content)
+    return render_template('home.html', searching=gpt2_answer, search=content)
+
     #if not result:
        # content = 'No results found.'
    # else:
       #  content = f'Search results for "{content}": {result}'
-    return render_template('home.html', searching=output, search=content)
+    #return render_template('home.html', searching=output, search=content)
 
 
 if __name__ == '__main__':

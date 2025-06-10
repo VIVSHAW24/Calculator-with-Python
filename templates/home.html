@@ -29,7 +29,7 @@
     <div>    
         <h3><b>Conversion from Power between Watt and dBm</b></h3>
         <form action="/conversion" method="post">
-            <input type="number" name="power" placeholder="Enter the value..." step="any" required value="{{ input_power if input_power is defined else '' }}">    
+            <input type="number" name="power" placeholder="Enter the value..." step="any" required value="{{ input_power if input_power is defined else '' }}" width="2000px">    
             <label for="operation1">Select Conversion:</label>
             <select name="operation1"  id="operation1" onchange="cal()">
                 <option value="dBm" {% if selected_operation == 'dBm' %}selected{% endif %}>dBm</option>
